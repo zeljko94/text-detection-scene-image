@@ -98,7 +98,7 @@ def text_detection(image, east, min_confidence, width, height):
         cv2.imshow(title,drawOn)
         cv2.moveWindow(title, 150+i*300, 150)
 
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
 
 
     # convert rects to polys
@@ -133,20 +133,29 @@ def text_detection(image, east, min_confidence, width, height):
 
 def text_detection_command():
     # construct the argument parser and parse the arguments
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--image", type=str,
-        help="path to input image")
-    ap.add_argument("-east", "--east", type=str, default=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'frozen_east_text_detection.pb'),
-        help="path to input EAST text detector")
-    ap.add_argument("-c", "--min-confidence", type=float, default=0.5,
-        help="minimum probability required to inspect a region")
-    ap.add_argument("-w", "--width", type=int, default=320,
-        help="resized image width (should be multiple of 32)")
-    ap.add_argument("-e", "--height", type=int, default=320,
-        help="resized image height (should be multiple of 32)")
-    args = vars(ap.parse_args())
+    east = os.path.join(os.path.dirname(os.path.realpath("__file__")), 'frozen_east_text_detection.pb')
+    min_confidence = 0.5
+    width = 320
+    height = 320
 
-    text_detection(image=args["image"], east=args["east"], min_confidence=args['min_confidence'], width=args["width"], height=args["height"], )
+    for filename in os.listdir('images'):
+        """
+        ap = argparse.ArgumentParser()
+        ap.add_argument("-i", "--image", type=str,
+            help="path to input image")
+        ap.add_argument("-east", "--east", type=str, default=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'frozen_east_text_detection.pb'),
+            help="path to input EAST text detector")
+        ap.add_argument("-c", "--min-confidence", type=float, default=0.5,
+            help="minimum probability required to inspect a region")
+        ap.add_argument("-w", "--width", type=int, default=320,
+            help="resized image width (should be multiple of 32)")
+        ap.add_argument("-e", "--height", type=int, default=320,
+            help="resized image height (should be multiple of 32)")
+        args = vars(ap.parse_args())
+        text_detection(image=args["image"], east=args["east"], min_confidence=args['min_confidence'], width=args["width"], height=args["height"], )
+        """
+        text_detection("images/" + filename, east, min_confidence, width, height, )
+
 
 
 if __name__ == '__main__':
