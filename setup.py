@@ -15,7 +15,7 @@ setuptools.setup(
     include_package_data=True,
     install_requires=[
         'nms>=0.1.5',
-        'numpy==1.15.0',
+        'numpy==1.22.0',
         'opencv-python>=3.4.3.18',
     ],
     entry_points={'console_scripts': [
